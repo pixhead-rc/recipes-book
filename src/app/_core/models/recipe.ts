@@ -19,8 +19,8 @@ export interface Step {
     value: string;
 }
 
-enum ValueTypes {
-    'Количество',
-    'Вес',
-    'Объем'
+export enum ValueTypes {
+    'Count',
+    'Weight',
+    'Volume'
 }

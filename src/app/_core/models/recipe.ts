@@ -22,5 +22,6 @@ export interface Step {
 export enum ValueTypes {
     'Count',
     'Weight',
-    'Volume'
+    'Volume',
+    'Spoons'
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Recipe } from 'src/app/_core/models/recipe';
+import { RecipesService } from 'src/app/_core/services/recipes.service';
 
 @Component({
   selector: 'recipe-view',
@@ -8,18 +10,23 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./recipe-view.component.scss']
 })
 export class RecipeViewComponent implements OnInit {
+  currentRecipe!: Recipe;
+  jsonrec!: string;
   recipeId!: string | null;
   $recipeIdSubscription!: Subscription;
 
   constructor(
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private recipesService: RecipesService
   ) { }
 
   ngOnInit() {
     this.$recipeIdSubscription = this.activatedRoute.paramMap.subscribe(
       (paramMap) => {
         this.recipeId = paramMap.get('id');
-        //fetch recipe data -- fetch(id);
+        if (this.recipeId) {
+          this.fetchRecipe(this.recipeId);
+        }
       }
     );
   }
@@ -29,6 +36,11 @@ export class RecipeViewComponent implements OnInit {
   }
 
   fetchRecipe(id: string) {
-
+    this.recipesService.getRecipe(id).subscribe(
+      recipe => {
+        this.currentRecipe = recipe
+        this.jsonrec = JSON.stringify(recipe);
+      }
+    );
   }
 }

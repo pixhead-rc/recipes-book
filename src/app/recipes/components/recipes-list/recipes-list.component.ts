@@ -21,15 +21,19 @@ export class RecipesListComponent implements OnInit {
     this.recipesService.getRecipesList().subscribe(
       response => {
         this.recipes = response;
+        for (let i = 0; i < 20; i++) {
+          this.recipes.push(response[0]);
+        }
       }
     );
   }
 
-  expandSortDropdown() {
+  toggleSortDropdown() {
     this.sortDropdownExpanded = !this.sortDropdownExpanded;
   }
 
   sortList(sortSetting: string) {
+    this.toggleSortDropdown();
     this.currentSortingSetting = sortSetting;
   }
 

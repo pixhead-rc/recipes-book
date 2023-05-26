@@ -1,25 +1,25 @@
 <div class="recipes">
   <div class="toolbox">
     <input class="toolbox_search" type="text" placeholder="Поиск рецепта...">
-    <div class="sort-dropdown" (click)="expandSortDropdown()">
-      <span *ngIf="!sortDropdownExpanded">Сортировка: {{currentSortingSetting}}</span>
-      <div class="sort-dropdown-content" *ngIf="sortDropdownExpanded">
-        <span class="sort-dropdown-item" (click)="sortList('Сначала недорогие')">Сначала недорогие</span>
-        <span class="sort-dropdown-item" (click)="sortList('Сначала дорогие')">Сначала дорогие</span>
-        <span class="sort-dropdown-item" (click)="sortList('Сначала популярные')">Сначала популярные</span>
-        <span class="sort-dropdown-item" (click)="sortList('По скидке (%)')">По скидке (%)</span>
-        <span class="sort-dropdown-item" (click)="sortList('Сначала обсуждаемые')">Сначала обсуждаемые</span>
-        <span class="sort-dropdown-item" (click)="sortList('Сначала с лучшей оценкой')">Сначала с лучшей оценкой</span>
-      </div>
+    <div class="sort-dropdown" (click)="toggleSortDropdown()" *ngIf="!sortDropdownExpanded">
+      <span>Сортировка: {{currentSortingSetting}}</span>
+    </div>
+    <div class="sort-dropdown-content" *ngIf="sortDropdownExpanded">
+      <span class="sort-dropdown-item" (click)="sortList('Сначала недорогие')">Сначала недорогие</span>
+      <span class="sort-dropdown-item" (click)="sortList('Сначала дорогие')">Сначала дорогие</span>
+      <span class="sort-dropdown-item" (click)="sortList('Сначала популярные')">Сначала популярные</span>
+      <span class="sort-dropdown-item" (click)="sortList('По скидке (%)')">По скидке (%)</span>
+      <span class="sort-dropdown-item" (click)="sortList('Сначала обсуждаемые')">Сначала обсуждаемые</span>
+      <span class="sort-dropdown-item" (click)="sortList('Сначала с лучшей оценкой')">Сначала с лучшей оценкой</span>
     </div>
   </div>
   <div class="recipes_list">
-    <div class="recipes_list-item" *ngFor="let recipe of recipes">
-      <div>
-        <span>{{recipe.title}}</span>
-        <span>{{recipe.date}}</span>
+    <div class="recipes_list-item" *ngFor="let recipe of recipes" [routerLink]="'recipe/' + recipe.id">
+      <div class="recipes_list-item-desc">
+        <span class="recipes_list-item-desc-title">{{recipe.title}}</span>
+        <span class="recipes_list-item-desc-date">{{recipe.date | date: 'dd.MM.yy HH:mm'}}</span>
       </div>
-      <div>
+      <div class="recipes_list-item-duration">
         <span>{{recipe.duration}}</span>
       </div>
     </div>

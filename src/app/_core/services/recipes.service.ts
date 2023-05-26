@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, find, first, map } from 'rxjs';
 import { RecipesListItem } from '../models/recipesListItem';
 import { Recipe } from '../models/recipe';
 
@@ -24,6 +24,7 @@ export class RecipesService {
     let recipesList: RecipesListItem[] = [];
     recipes.forEach(r => {
       recipesList.push({
+        id: r.id,
         title: r.title,
         date: r.date,
         duration: r.duration
@@ -35,6 +36,13 @@ export class RecipesService {
 
     this.recipes = this.recipesSubj$.asObservable();
     this.recipesList = this.recipesListSubj$.asObservable();
+  }
+
+  getRecipe(id: string): Observable<Recipe> {
+    this.refreshMockBackend();
+    return this.recipes.pipe(
+      map(recipes => recipes.filter(r => r.id === id)[0])
+    );
   }
 
   getRecipes(): Observable<Recipe[]> {

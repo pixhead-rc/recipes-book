@@ -1,0 +1,48 @@
+.recipes {
+    width: 20rem;
+    height: 100%;
+}
+
+.toolbox {
+    
+}
+
+.toolbox_search {
+    border: 0rem;
+    border-radius: 0rem;
+    box-sizing: border-box;
+
+    width: 100%;
+    height: 2rem;
+    margin-bottom: 0.25rem;
+
+    font-size: 1rem;
+    outline: none;
+    background-color: #c5c5c5;
+}
+
+.sort-dropdown {
+    text-align: center;
+    cursor: pointer;
+
+    width: 100%;
+    height: 2rem;
+    line-height: 2rem;
+
+    font-size: 0.75rem;
+}
+
+.sort-dropdown-content {
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+}
+
+.sort-dropdown-item {
+    height: 2rem;
+    line-height: 2rem;
+}
+
+.sort-dropdown-item:hover {
+    background-color: #c5c5c5;
+}

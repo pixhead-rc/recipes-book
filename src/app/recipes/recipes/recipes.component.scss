@@ -1,0 +1,26 @@
+.recipes {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.left-menu {
+    padding: 0.5rem;
+}
+
+.recipe {
+    padding: 0.5rem;
+    width: 100%;
+}
+
+.bg-green {
+    background-color: #014e01;
+}
+
+.bg-blue {
+    background-color: #3600cc;
+}
+
+.bg-red {
+    background-color: #ec0000;
+}

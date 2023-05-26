@@ -81,7 +81,11 @@
 }
 
 .recipes_list-item-desc-title {
-    font-size: 1.5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 200px;
+    font-size: 1.25rem;
     line-height: 2rem;
     font-weight: 600;
 }

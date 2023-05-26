@@ -32,8 +32,10 @@ export class RecipesListComponent implements OnInit {
       response => {
         this.recipes = response;
         this.filteredRecipes = response;
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < 6; i++) {
           this.recipes.push(response[0]);
+          this.recipes.push(response[1]);
+          this.recipes.push(response[2]);
         }
       }
     );

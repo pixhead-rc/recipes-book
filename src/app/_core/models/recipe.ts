@@ -23,5 +23,6 @@ export enum ValueTypes {
     'Count',
     'Weight',
     'Volume',
-    'Spoons'
+    'Spoons',
+    'Any'
 }

@@ -13,7 +13,15 @@
       </div>
     </div>
   </div>
-  <div class="recipes__list">
-
+  <div class="recipes_list">
+    <div class="recipes_list-item" *ngFor="let recipe of recipes">
+      <div>
+        <span>{{recipe.title}}</span>
+        <span>{{recipe.date}}</span>
+      </div>
+      <div>
+        <span>{{recipe.duration}}</span>
+      </div>
+    </div>
   </div>
 </div>

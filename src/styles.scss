@@ -3,3 +3,45 @@ html, body {
     height: 100%;
     margin: 0px!important;
 }
+
+.scrollbar::-webkit-scrollbar {
+    width: 7px;
+    height: 20px;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    background: rgba(55, 65, 81, 0);
+  }
+
+  .scrollbar-mt::-webkit-scrollbar-track {
+    margin-top: 5rem;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: #815947;
+    border-radius: 100vh;
+    border: 3px solid rgba(55, 65, 81, 0);
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #b49180;
+  }
+
+  .scrollbar-x::-webkit-scrollbar {
+    width: 20px;
+    height: 10px;
+  }
+
+  .scrollbar-x::-webkit-scrollbar-track {
+    background: rgba(55, 65, 81, 0);
+  }
+
+  .scrollbar-x::-webkit-scrollbar-thumb {
+    background: #252525;
+    border-radius: 100vh;
+    border: 3px solid rgb(55 65 81 / var(--tw-bg-opacity));
+  }
+
+  .scrollbar-x::-webkit-scrollbar-thumb:hover {
+    background: #c0a0b9;
+  }

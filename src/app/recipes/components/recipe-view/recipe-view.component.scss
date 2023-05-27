@@ -1,0 +1,25 @@
+@media only screen and (max-width: 1200px) {
+    .container {
+        max-width: 100%;
+        background-color: #ffffff;
+        margin: 0 auto;
+    }
+}
+@media only screen and (min-width: 1200px) {
+    .container {
+        max-width: 75%;
+        background-color: #ffffff;
+        margin: 0 auto;
+    }
+}
+
+.recipe-view {
+    padding: 2rem;
+}
+
+.shadow {
+    -webkit-box-shadow: 0px 0px 25px 0px rgba(34, 60, 80, 0.4);
+    -moz-box-shadow: 0px 0px 25px 0px rgba(34, 60, 80, 0.4);
+    box-shadow: 0px 0px 25px 0px rgba(34, 60, 80, 0.4);
+}
+

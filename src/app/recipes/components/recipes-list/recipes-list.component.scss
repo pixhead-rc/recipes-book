@@ -7,6 +7,7 @@
 
 .toolbox {
     box-sizing: border-box;
+    padding: 0.5rem;
 }
 
 .toolbox_search {
@@ -52,8 +53,8 @@
 }
 
 .recipes_list {
+    margin: 0 0.25rem 0 0.25rem;
     height: 100%;
-    border: 1px solid black;
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
@@ -62,6 +63,8 @@
 
 .recipes_list-item {
     padding: 0.25rem 1rem 0.25rem 1rem;
+    margin-bottom: 0.25rem;
+    margin-right: 0.25rem;
     height: 4rem;
     display: flex;
     flex-direction: row;

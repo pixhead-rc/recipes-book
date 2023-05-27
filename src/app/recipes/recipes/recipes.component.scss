@@ -5,22 +5,19 @@
 }
 
 .left-menu {
-    padding: 0.5rem;
+    z-index: 10;
+    border-right: 1px solid #dab46f;
+    -webkit-box-shadow: 8px 0px 10px 0px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 8px 0px 10px 0px rgba(34, 60, 80, 0.2);
+    box-shadow: 8px 0px 10px 0px rgba(34, 60, 80, 0.2);
 }
 
 .recipe {
     padding: 0.5rem;
     width: 100%;
-}
-
-.bg-green {
-    background-color: #014e01;
-}
-
-.bg-blue {
-    background-color: #3600cc;
-}
-
-.bg-red {
-    background-color: #ec0000;
+    overflow-y: scroll;
+    background-image: url('../../../assets/images/recipe-repeateble-bg.png');
+    background-repeat: repeat;
+    background-attachment: local;
+    background-size: 25%;
 }

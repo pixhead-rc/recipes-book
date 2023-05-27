@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, Subscription, debounceTime, distinctUntilChanged, filter } from 'rxjs';
-import { Modals } from 'src/app/_core/models/modals.enum';
+import { Modals } from 'src/app/_core/models/modals';
 import { RecipesListItem } from 'src/app/_core/models/recipesListItem';
 import { ModalService } from 'src/app/_core/services/modal.service';
 import { RecipesService } from 'src/app/_core/services/recipes.service';
@@ -35,6 +35,11 @@ export class RecipesListComponent implements OnInit {
       response => {
         this.recipes = response;
         this.filteredRecipes = response;
+        for (let i = 0; i < 6; i++) {
+          this.recipes.push(response[0]);
+          this.recipes.push(response[1]);
+          this.recipes.push(response[2]);
+        }
       }
     );
     this.searchSubscription = this._search$.asObservable().pipe(
@@ -67,8 +72,8 @@ export class RecipesListComponent implements OnInit {
     this.currentSortingSetting = sortSetting;
   }
 
-  open() {
-    this.modalService.openModal(Modals.EditRecipeModal);
+  openEditModal() {
+    this.modalService.openModal(Modals.EditRecipeModal, {test:'qweqweqweqweqwe'});
   }
 
 }

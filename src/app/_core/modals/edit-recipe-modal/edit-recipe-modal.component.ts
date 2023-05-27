@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ModalService } from '../../services/modal.service';
-import { Modals } from '../../models/modals.enum';
-import { Observable } from 'rxjs';
+import { ModalState, Modals } from '../../models/modals';
+import { Observable, Subscription, tap } from 'rxjs';
 
 @Component({
   selector: 'edit-recipe-modal',
@@ -14,14 +14,24 @@ import { Observable } from 'rxjs';
   ]
 })
 export class EditRecipeModalComponent implements OnInit {
-  isModalOpened$!: Observable<boolean> | undefined;
+  modalStateSub$!: Subscription | undefined;
+  modalState!: ModalState;
 
   constructor(
     private modalService: ModalService
   ) { }
 
   ngOnInit() {
-    this.isModalOpened$ = this.modalService.modalsStates.get(Modals.EditRecipeModal)?.asObservable();
+    this.modalStateSub$ = this.modalService.modalsStates.get(Modals.EditRecipeModal)?.asObservable().subscribe(
+      ms => {
+        this.modalState = ms;
+        console.log(ms.context);
+      }
+    );;
+  }
+
+  ngOnDestroy() {
+    this.modalStateSub$?.unsubscribe();
   }
 
   closeSelf() {

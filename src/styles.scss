@@ -1,7 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
 html, body {
     height: 100%;
     margin: 0px!important;
+    font-family: 'Roboto', sans-serif;
 }
 
 .scrollbar::-webkit-scrollbar {
@@ -18,13 +20,13 @@ html, body {
   }
 
   .scrollbar::-webkit-scrollbar-thumb {
-    background: #815947;
+    background: #00aeff;
     border-radius: 100vh;
     border: 3px solid rgba(55, 65, 81, 0);
   }
 
   .scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #b49180;
+    background: #7ed6ff;
   }
 
   .scrollbar-x::-webkit-scrollbar {

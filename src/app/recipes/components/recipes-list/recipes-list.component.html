@@ -1,6 +1,6 @@
 <div class="recipes">
   <div class="toolbox">
-    <input class="toolbox_search" type="text" placeholder="Поиск рецепта..." [(ngModel)]="search">
+    <input class="toolbox_search" type="text" placeholder="поиск..." [(ngModel)]="search">
     <div class="sort-dropdown" (click)="toggleSortDropdown()" *ngIf="!sortDropdownExpanded">
       <span>Сортировка: {{currentSortingSetting}}</span>
     </div>
@@ -24,5 +24,5 @@
       </div>
     </div>
   </div>
-  <button class="button-new-recipe" (click)="open()">+ Добавить</button>
+  <button class="button-new-recipe" (click)="openEditModal()">+ Добавить</button>
 </div>

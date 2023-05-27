@@ -1,5 +1,19 @@
-<div class="screen" *ngIf="isModalOpened$ | async">
-  <div class="modal-backdrop" (click)="closeSelf()">
+<div class="screen" *ngIf="modalState.active">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="type">Добавление</span>
+      <div class="modal-close-btn" (click)="closeSelf()">
+        <span>X</span>
+      </div>
+    </div>
+    <div class="modal-body scrollbar">
+      <div>
+        qwe
+      </div>
+    </div>
+    <div class="modal-footer">
 
+    </div>
   </div>
+  <div class="modal-backdrop" (click)="closeSelf()"></div>
 </div>

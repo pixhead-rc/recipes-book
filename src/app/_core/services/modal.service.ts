@@ -1,32 +1,32 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Modals } from '../models/modals.enum';
+import { ModalState, Modals } from '../models/modals';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModalService {
-  modalsStates: Map<Modals, BehaviorSubject<boolean>> = new Map();
+  modalsStates: Map<Modals, BehaviorSubject<ModalState>> = new Map();
 
   constructor() { 
     Object.values(Modals).forEach(
       m => {
-        this.modalsStates.set(+m, new BehaviorSubject<boolean>(false));
+        this.modalsStates.set(+m, new BehaviorSubject<ModalState>({active: true, context: {}}));
       }
     );
   }
 
-  openModal(modal: Modals) {
-    this.modalsStates.get(modal)?.next(true);
+  openModal(modal: Modals, context: Object = {}) {
+    this.modalsStates.get(modal)?.next({active: true, context: context});
   }
 
   closeModal(modal: Modals) {
-    this.modalsStates.get(modal)?.next(false);
+    this.modalsStates.get(modal)?.next({active: false, context: {}});
   }
 
   closeAllModals() {
     this.modalsStates.forEach(
-      ms => ms.next(false)
+      ms => ms.next({active: false, context: {}})
     );
   }
 

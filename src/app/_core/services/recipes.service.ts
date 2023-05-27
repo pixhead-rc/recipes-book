@@ -9,11 +9,11 @@ import { Recipe } from '../models/recipe';
 export class RecipesService {
   private recipesLS: string | null = localStorage.getItem('recipes');
 
-  private recipesSubj$!: BehaviorSubject<Recipe[]>;
-  private recipesListSubj$!: BehaviorSubject<RecipesListItem[]>;
+  private recipesSubj$ = new BehaviorSubject<Recipe[]>([]);
+  private recipesListSubj$ = new BehaviorSubject<RecipesListItem[]>([]);
 
-  recipes!: Observable<Recipe[]>;
-  recipesList!: Observable<RecipesListItem[]>;
+  recipes: Observable<Recipe[]> = this.recipesSubj$.asObservable();
+  recipesList: Observable<RecipesListItem[]> = this.recipesListSubj$.asObservable();
 
   constructor() {
     this.refreshMockBackend();
@@ -31,11 +31,8 @@ export class RecipesService {
       } as RecipesListItem)
     });
 
-    this.recipesSubj$ = new BehaviorSubject<Recipe[]>(recipes);
-    this.recipesListSubj$ = new BehaviorSubject<RecipesListItem[]>(recipesList);
-
-    this.recipes = this.recipesSubj$.asObservable();
-    this.recipesList = this.recipesListSubj$.asObservable();
+    this.recipesSubj$.next(recipes);
+    this.recipesListSubj$.next(recipesList);
   }
 
   getRecipe(id: string): Observable<Recipe> {

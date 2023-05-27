@@ -6,18 +6,20 @@ import { RecipesListComponent } from './components/recipes-list/recipes-list.com
 import { RecipeViewComponent } from './components/recipe-view/recipe-view.component';
 import { FormsModule } from '@angular/forms';
 import { PipesModule } from '../_core/pipes/pipes.module';
+import { EditRecipeModalComponent } from "../_core/modals/edit-recipe-modal/edit-recipe-modal.component";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    RecipesRoutingModule,
-    PipesModule
-  ],
-  declarations: [
-    RecipesComponent,
-    RecipesListComponent,
-    RecipeViewComponent
-  ]
+    declarations: [
+        RecipesComponent,
+        RecipesListComponent,
+        RecipeViewComponent
+    ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        RecipesRoutingModule,
+        PipesModule,
+        EditRecipeModalComponent
+    ]
 })
 export class RecipesModule { }

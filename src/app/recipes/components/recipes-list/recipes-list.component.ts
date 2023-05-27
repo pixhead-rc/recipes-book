@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, Subscription, debounceTime, distinctUntilChanged, filter } from 'rxjs';
+import { Modals } from 'src/app/_core/models/modals.enum';
 import { RecipesListItem } from 'src/app/_core/models/recipesListItem';
+import { ModalService } from 'src/app/_core/services/modal.service';
 import { RecipesService } from 'src/app/_core/services/recipes.service';
 
 @Component({
@@ -24,7 +26,8 @@ export class RecipesListComponent implements OnInit {
   sortDropdownExpanded: boolean = false;
 
   constructor(
-    private recipesService: RecipesService
+    private recipesService: RecipesService,
+    private modalService: ModalService
   ) { }
 
   ngOnInit() {
@@ -67,6 +70,10 @@ export class RecipesListComponent implements OnInit {
   sortList(sortSetting: string) {
     this.toggleSortDropdown();
     this.currentSortingSetting = sortSetting;
+  }
+
+  open() {
+    this.modalService.openModal(Modals.EditRecipeModal);
   }
 
 }

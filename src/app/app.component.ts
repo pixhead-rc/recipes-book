@@ -12,7 +12,7 @@ export class AppComponent {
     {
       id: 'f6b5141e-95a4-405e-912d-22bd925fa0f8',
       date: new Date(),
-      duration: 40,
+      duration: 41,
       title: 'Брауни (brownie)',
       subtitle: 'Рецепт этого брауни очень простой, тут нет каких-то сложных процессов, с которыми вы можете не справиться, а я, в свою очередь, постаралась подробно описать все нюансы.',
       description: 'Один из самых популярных десертов в мире — брауни — был придуман в 1893 году на кухне легендарного отеля Palmer House в Чикаго. Этот пирог там пекут до сих пор по оригинальному рецепту, покрывая сверху абрикосовой глазурью. В домашней версии, впрочем, у брауни получается такая изумительная сахарная корочка, что глазировать ее было бы преступлением. У традиционных шоколадных брауни ванильный аромат, хрустящая корочка и влажная серединка. В торт также добавляют грецкие орехи или фисташки, а еще клюкву.',
@@ -273,6 +273,11 @@ export class AppComponent {
   ];
 
   constructor() {
-    localStorage.setItem('recipes', JSON.stringify(this.mockRecipesData));
+    let recipesStr = localStorage.getItem('recipes');
+    if (recipesStr === null) {
+      localStorage.setItem('recipes', JSON.stringify(this.mockRecipesData));
+    } else {
+      this.mockRecipesData = JSON.parse(recipesStr) as Recipe[];
+    }
   }
 }

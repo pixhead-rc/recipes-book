@@ -7,7 +7,7 @@ import { Recipe } from '../models/recipe';
   providedIn: 'root'
 })
 export class RecipesService {
-  private recipesLS: string | null = localStorage.getItem('recipes');
+  private recipesLS!: string | null;
 
   private recipesSubj$ = new BehaviorSubject<Recipe[]>([]);
   private recipesListSubj$ = new BehaviorSubject<RecipesListItem[]>([]);
@@ -20,6 +20,7 @@ export class RecipesService {
   }
 
   refreshMockBackend() {
+    this.recipesLS = localStorage.getItem('recipes');
     let recipes: Recipe[] = this.recipesLS ? JSON.parse(this.recipesLS) as Recipe[] : [];
     let recipesList: RecipesListItem[] = [];
     recipes.forEach(r => {

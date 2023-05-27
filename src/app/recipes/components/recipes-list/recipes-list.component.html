@@ -13,7 +13,6 @@
       <span class="sort-dropdown-item" (click)="sortList('Сначала с лучшей оценкой')">Сначала с лучшей оценкой</span>
     </div>
   </div>
-  <button (click)="open()">qweqwe</button>
   <div class="recipes_list scrollbar">
     <div class="recipes_list-item" [title]="recipe.title" *ngFor="let recipe of filteredRecipes" [routerLink]="'recipe/' + recipe.id">
       <div class="recipes_list-item-desc">
@@ -25,4 +24,5 @@
       </div>
     </div>
   </div>
+  <button class="button-new-recipe" (click)="open()">+ Добавить</button>
 </div>

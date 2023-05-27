@@ -5,6 +5,18 @@
     flex-direction: column;
 }
 
+.button-new-recipe {
+    border: 0rem;
+    border-radius: 0rem;
+    box-sizing: border-box;
+    height: 3rem;
+    cursor: pointer;
+}
+
+.button-new-recipe:hover {
+    background-color: #c5c5c5;
+}
+
 .toolbox {
     box-sizing: border-box;
     padding: 0.5rem;
@@ -53,7 +65,7 @@
 }
 
 .recipes_list {
-    margin: 0 0.25rem 0 0.25rem;
+    margin-left: 0.25rem;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -64,7 +76,6 @@
 .recipes_list-item {
     padding: 0.25rem 1rem 0.25rem 1rem;
     margin-bottom: 0.25rem;
-    margin-right: 0.25rem;
     height: 4rem;
     display: flex;
     flex-direction: row;

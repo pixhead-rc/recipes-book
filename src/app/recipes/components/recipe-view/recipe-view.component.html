@@ -5,8 +5,7 @@
         <h2>Ингридиенты:</h2>
         <h3 *ngFor="let ingredient of currentRecipe.ingredients">
             <span>{{ingredient.name}}</span>
-            <span>{{ingredient.value}}</span>
-            <span>{{ingredient.valueType}}</span>
+            <span>{{ingredient.value | valueType : ingredient.valueType}}</span>
         </h3>
         <h2>Шаги приготовления:</h2>
         <h3 *ngFor="let step of currentRecipe.steps; let i = index">

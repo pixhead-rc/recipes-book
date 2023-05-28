@@ -108,7 +108,7 @@
     height: 2rem;
     font-size: 1rem;
     border-radius: 0.25rem;
-    border: 0.2rem solid transparent;
+    border: 0.15rem solid transparent;
 }
 
 .label {
@@ -119,14 +119,14 @@
 }
 
 .area {
-    height: 6rem;
+    min-height: 1rem;
     resize: vertical;
     font-size: 1rem;
     font-family: 'Roboto', sans-serif;
 }
 
 .invalid {
-    border: 0.2rem solid red;
+    border: 0.15rem solid red;
 }
 
 .w-25 {

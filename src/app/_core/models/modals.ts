@@ -4,5 +4,5 @@ export enum Modals {
 
 export interface ModalState {
     active: boolean;
-    context: Object;
+    context: Map<string, any>;
 }

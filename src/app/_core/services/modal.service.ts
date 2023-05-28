@@ -6,28 +6,33 @@ import { ModalState, Modals } from '../models/modals';
   providedIn: 'root'
 })
 export class ModalService {
-  modalsStates: Map<Modals, BehaviorSubject<ModalState>> = new Map();
+  private modalsStates: Map<Modals, BehaviorSubject<ModalState>> = new Map();
 
   constructor() { 
     Object.values(Modals).forEach(
       m => {
-        this.modalsStates.set(+m, new BehaviorSubject<ModalState>({active: true, context: {}}));
+        this.modalsStates.set(+m, new BehaviorSubject<ModalState>({active: true, context: new Map()}));
       }
     );
   }
 
   openModal(modal: Modals, context: Object = {}) {
-    this.modalsStates.get(modal)?.next({active: true, context: context});
+    const contextMap = new Map(Object.entries(context));
+    this.modalsStates.get(modal)?.next({active: true, context: contextMap});
   }
 
   closeModal(modal: Modals) {
-    this.modalsStates.get(modal)?.next({active: false, context: {}});
+    this.modalsStates.get(modal)?.next({active: false, context: new Map()});
   }
 
   closeAllModals() {
     this.modalsStates.forEach(
-      ms => ms.next({active: false, context: {}})
+      ms => ms.next({active: false, context: new Map()})
     );
+  }
+
+  getModalState(modal: Modals) {
+    return this.modalsStates.get(modal)?.asObservable();
   }
 
 }

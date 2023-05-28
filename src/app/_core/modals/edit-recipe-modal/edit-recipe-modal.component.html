@@ -1,7 +1,7 @@
 <div class="screen" *ngIf="modalState.active">
   <div class="modal" [@enterContainerFromBottom]>
     <div class="modal-header">
-      <span class="type">Добавление</span>
+      <span class="type">{{recipeId ? 'Изменение' : 'Добавление'}}</span>
       <div class="modal-close-btn" (click)="closeSelf()">
         <span>X</span>
       </div>
@@ -35,8 +35,8 @@
           </div>
           <ng-container formArrayName="steps">
             <div class="row" *ngFor="let ingr of (recipeForm.controls['steps'] | asFormArray).controls; index as i" [formGroupName]="i">
-              <input class="field w-100" placeholder="Описание" type="text" formControlName="value"
-                [ngClass]="{'invalid' : ingr.get('value')?.errors && ingr.get('value')?.touched}">
+              <textarea class="field area w-100" placeholder="Описание" type="text" formControlName="value"
+                [ngClass]="{'invalid' : ingr.get('value')?.errors && ingr.get('value')?.touched}"></textarea>
             </div>
           </ng-container>
         </div>

@@ -73,7 +73,7 @@ export class RecipesListComponent implements OnInit {
   }
 
   openEditModal() {
-    this.modalService.openModal(Modals.EditRecipeModal, {test:'qweqweqweqweqwe'});
+    this.modalService.openModal(Modals.EditRecipeModal, {id: 'f6b5141e-95a4-405e-912d-22bd925fa0f8'});
   }
 
 }

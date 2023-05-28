@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, find, first, map } from 'rxjs';
+import { BehaviorSubject, Observable, concatMap, find, first, map } from 'rxjs';
 import { RecipesListItem } from '../models/recipesListItem';
 import { Recipe } from '../models/recipe';
 
@@ -39,7 +39,15 @@ export class RecipesService {
   getRecipe(id: string): Observable<Recipe> {
     this.refreshMockBackend();
     return this.recipes.pipe(
-      map(recipes => recipes.filter(r => r.id === id)[0])
+      map(recipes => {
+        const recipe = recipes.filter(r => r.id === id)[0];
+        if (recipe) {
+          return recipe;
+        }
+        else {
+          throw new Error('No recipe for given id');
+        }
+      })
     );
   }
 

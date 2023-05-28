@@ -20,24 +20,31 @@
               [ngClass]="{'invalid' : recipeForm.get('description')?.errors && recipeForm.get('description')?.touched}"></textarea>
           </div>
           <div class="row">
-            <span class="label">Ингридиенты</span>
+            <span class="label">Ингредиенты</span>
           </div>
-          <div class="row" *ngFor="let ingr of currentRecipe.ingredients; let i = index">
-            <input class="field w-75" placeholder="Название" type="text">
-            <input class="field w-25" placeholder="Количество" type="text">
-          </div>
+          <ng-container formArrayName="ingredients">
+            <div class="row" *ngFor="let ingr of (recipeForm.controls['ingredients'] | asFormArray).controls; index as i" [formGroupName]="i">
+              <input class="field w-75" placeholder="Название" type="text" formControlName="name"
+                [ngClass]="{'invalid' : ingr.get('name')?.errors && ingr.get('name')?.touched}">
+              <input class="field w-25" placeholder="Количество" maxlength="4" type="text" formControlName="value"
+                [ngClass]="{'invalid' : ingr.get('value')?.errors && ingr.get('value')?.touched}">
+            </div>
+          </ng-container>
           <div class="row">
             <span class="label">Шаги приготовления</span>
           </div>
-          <div class="row" *ngFor="let step of currentRecipe.steps">
-            <input class="field w-100" placeholder="Описание" type="text">
-          </div>
+          <ng-container formArrayName="steps">
+            <div class="row" *ngFor="let ingr of (recipeForm.controls['steps'] | asFormArray).controls; index as i" [formGroupName]="i">
+              <input class="field w-100" placeholder="Описание" type="text" formControlName="value"
+                [ngClass]="{'invalid' : ingr.get('value')?.errors && ingr.get('value')?.touched}">
+            </div>
+          </ng-container>
         </div>
       </div>
     </div>
-    <div class="modal-footer">
+    <!-- <div class="modal-footer">
 
-    </div>
+    </div> -->
   </div>
   <div class="modal-backdrop" (click)="closeSelf()"></div>
 </div>

@@ -1,22 +1,22 @@
-export interface Recipe {
-    id: string;
-    date: Date;
-    duration: number;
-    title: string;
-    subtitle: string;
-    description: string;
-    ingredients: Ingredient[];
-    steps: Step[];
+export class Recipe {
+    id!: string;
+    date!: Date;
+    duration!: number;
+    title!: string;
+    subtitle!: string;
+    description!: string;
+    ingredients: Ingredient[] = [];
+    steps: Step[] = [];
 }
 
-export interface Ingredient {
-    name: string;
-    value: string;
-    valueType: ValueTypes;
+export class Ingredient {
+    name!: string;
+    value!: string;
+    valueType!: ValueTypes;
 }
 
-export interface Step {
-    value: string;
+export class Step {
+    value!: string;
 }
 
 export enum ValueTypes {

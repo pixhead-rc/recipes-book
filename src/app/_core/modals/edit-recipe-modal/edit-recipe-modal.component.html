@@ -1,5 +1,5 @@
 <div class="screen" *ngIf="modalState.active">
-  <div class="modal">
+  <div class="modal" [@enterContainerFromBottom]>
     <div class="modal-header">
       <span class="type">Добавление</span>
       <div class="modal-close-btn" (click)="closeSelf()">
@@ -7,8 +7,32 @@
       </div>
     </div>
     <div class="modal-body scrollbar">
-      <div>
-        qwe
+      <div class="fields" [formGroup]="recipeForm">
+        <div class="column">
+          <div class="row">
+            <input class="field w-75" placeholder="Название" type="text" formControlName="title"
+              [ngClass]="{'invalid' : recipeForm.get('title')?.errors && recipeForm.get('title')?.touched}">
+            <input class="field w-25" placeholder="Время приготовления" maxlength="3" type="text" formControlName="duration"
+              [ngClass]="{'invalid' : recipeForm.get('duration')?.errors && recipeForm.get('duration')?.touched}">
+          </div>
+          <div class="row">
+            <textarea class="field area w-100" placeholder="Краткое описание" formControlName="description"
+              [ngClass]="{'invalid' : recipeForm.get('description')?.errors && recipeForm.get('description')?.touched}"></textarea>
+          </div>
+          <div class="row">
+            <span class="label">Ингридиенты</span>
+          </div>
+          <div class="row" *ngFor="let ingr of currentRecipe.ingredients; let i = index">
+            <input class="field w-75" placeholder="Название" type="text">
+            <input class="field w-25" placeholder="Количество" type="text">
+          </div>
+          <div class="row">
+            <span class="label">Шаги приготовления</span>
+          </div>
+          <div class="row" *ngFor="let step of currentRecipe.steps">
+            <input class="field w-100" placeholder="Описание" type="text">
+          </div>
+        </div>
       </div>
     </div>
     <div class="modal-footer">

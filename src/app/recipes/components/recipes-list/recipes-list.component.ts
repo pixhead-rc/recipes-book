@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, RoutesRecognized } from '@angular/router';
 import { BehaviorSubject, Subscription, debounceTime, distinctUntilChanged, filter } from 'rxjs';
 import { Modals } from 'src/app/_core/models/modals';
 import { RecipesListItem } from 'src/app/_core/models/recipesListItem';
@@ -13,6 +14,7 @@ import { RecipesService } from 'src/app/_core/services/recipes.service';
 export class RecipesListComponent implements OnInit {
   recipes: RecipesListItem[] = [];
   filteredRecipes: RecipesListItem[] = [];
+  selectedRecipeId!: string | null;
 
   _search!: string;
   _search$ = new BehaviorSubject(this._search);
@@ -27,7 +29,9 @@ export class RecipesListComponent implements OnInit {
 
   constructor(
     private recipesService: RecipesService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -35,13 +39,9 @@ export class RecipesListComponent implements OnInit {
       response => {
         this.recipes = response;
         this.filteredRecipes = response;
-        for (let i = 0; i < 6; i++) {
-          this.recipes.push(response[0]);
-          this.recipes.push(response[1]);
-          this.recipes.push(response[2]);
-        }
       }
     );
+
     this.searchSubscription = this._search$.asObservable().pipe(
       filter(searchText => !!searchText && searchText.length > 2 || searchText === ''),
       debounceTime(500),
@@ -51,6 +51,12 @@ export class RecipesListComponent implements OnInit {
         this.filteredRecipes = this.filterInList(searchText);
       }
     );
+
+    this.markSelectedRecipe();
+  }
+
+  ngDoCheck() {
+    this.markSelectedRecipe();
   }
 
   ngOnDestroy() {
@@ -72,8 +78,12 @@ export class RecipesListComponent implements OnInit {
     this.currentSortingSetting = sortSetting;
   }
 
+  markSelectedRecipe() {
+    this.selectedRecipeId = this.router.url.split('/')[this.router.url.split('/').length - 1];
+  }
+
   openEditModal() {
-    this.modalService.openModal(Modals.EditRecipeModal, {id: 'f6b5141e-95a4-405e-912d-22bd925fa0f8'});
+    this.modalService.openModal(Modals.EditRecipeModal);
   }
 
 }

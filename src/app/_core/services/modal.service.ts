@@ -11,7 +11,7 @@ export class ModalService {
   constructor() { 
     Object.values(Modals).forEach(
       m => {
-        this.modalsStates.set(+m, new BehaviorSubject<ModalState>({active: true, context: new Map()}));
+        this.modalsStates.set(+m, new BehaviorSubject<ModalState>({active: false, context: new Map()}));
       }
     );
   }
@@ -32,6 +32,7 @@ export class ModalService {
   }
 
   getModalState(modal: Modals) {
+    console.log(modal);
     return this.modalsStates.get(modal)?.asObservable();
   }
 

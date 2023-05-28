@@ -1,5 +1,6 @@
 export enum Modals {
-    EditRecipeModal
+    EditRecipeModal,
+    DeleteRecipeModal
 }
 
 export interface ModalState {

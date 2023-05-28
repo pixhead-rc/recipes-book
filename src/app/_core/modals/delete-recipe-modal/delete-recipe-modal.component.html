@@ -1,0 +1,22 @@
+<div class="screen" *ngIf="modalState.active">
+  <div class="modal" [@enterContainerFromBottom]>
+    <div class="modal-header">
+      <span class="type">Удаление</span>
+      <div class="modal-close-btn" (click)="closeSelf()">
+        <span>X</span>
+      </div>
+    </div>
+    <div class="modal-body">
+      <span>Вы действительно хотите удалить рецепт?</span>
+      <div class="buttons">
+        <div class="btn btn-blue" (click)="closeSelf()">
+          <span>Отмена</span>
+        </div>
+        <div class="btn btn-red" (click)="deleteRecipe()">
+          <span>Удалить</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-backdrop" (click)="closeSelf()"></div>
+</div>

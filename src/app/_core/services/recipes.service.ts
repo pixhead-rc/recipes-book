@@ -60,4 +60,8 @@ export class RecipesService {
     this.refreshMockBackend();
     return this.recipesList;
   }
+
+  deleteRecipe(id: string) {
+
+  }
 }

@@ -31,7 +31,7 @@ export class EditRecipeModalComponent implements OnInit {
   currentRecipe!: Recipe;
   recipeForm!: FormGroup;
 
-  recipeId!: string;
+  recipeId!: string | null;
 
   constructor(
     private modalService: ModalService,
@@ -44,6 +44,7 @@ export class EditRecipeModalComponent implements OnInit {
       ms => {
         this.modalState = ms;
         if (ms.context && ms.context.get('id')) {
+          this.recipeId = ms.context.get('id');
           this.editableRecipeInit(ms.context.get('id'));
         } else {
           this.emptyRecipeInit();
@@ -66,6 +67,7 @@ export class EditRecipeModalComponent implements OnInit {
   }
 
   closeSelf() {
+    this.recipeId = null;
     this.modalService.closeModal(Modals.EditRecipeModal);
   }
 

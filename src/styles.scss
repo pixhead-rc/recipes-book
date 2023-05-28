@@ -28,22 +28,3 @@ html, body {
   .scrollbar::-webkit-scrollbar-thumb:hover {
     background: #7ed6ff;
   }
-
-  .scrollbar-x::-webkit-scrollbar {
-    width: 20px;
-    height: 10px;
-  }
-
-  .scrollbar-x::-webkit-scrollbar-track {
-    background: rgba(55, 65, 81, 0);
-  }
-
-  .scrollbar-x::-webkit-scrollbar-thumb {
-    background: #252525;
-    border-radius: 100vh;
-    border: 3px solid rgb(55 65 81 / var(--tw-bg-opacity));
-  }
-
-  .scrollbar-x::-webkit-scrollbar-thumb:hover {
-    background: #c0a0b9;
-  }

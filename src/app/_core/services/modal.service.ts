@@ -32,7 +32,6 @@ export class ModalService {
   }
 
   getModalState(modal: Modals) {
-    console.log(modal);
     return this.modalsStates.get(modal)?.asObservable();
   }
 

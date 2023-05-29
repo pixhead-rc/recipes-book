@@ -1,8 +1,8 @@
 <div class="container shadow">
-    <div class="recipe-view">
+    <div class="recipe-view" *ngIf="currentRecipe">
         <h1>{{currentRecipe.title}}</h1>
         <h3>{{currentRecipe.description}}</h3>
-        <h2>Ингридиенты:</h2>
+        <h2>Ингредиенты:</h2>
         <h3 *ngFor="let ingredient of currentRecipe.ingredients">
             <span>{{ingredient.name}} - </span>
             <span>{{ingredient.value | valueType : ingredient.valueType}}</span>
@@ -11,6 +11,11 @@
         <h3 *ngFor="let step of currentRecipe.steps; let i = index">
             <span>{{i + 1}} </span><span>{{step.value}}</span>
         </h3>
+    </div>
+</div>
+<div class="no-recipe-view" *ngIf="!currentRecipe">
+    <div class="message shadow">
+        <span>Выберите рецепт из списка</span>
     </div>
 </div>
 

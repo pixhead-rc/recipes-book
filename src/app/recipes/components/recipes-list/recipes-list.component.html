@@ -16,10 +16,10 @@
         [ngClass]="{'recipes_list-item-selected' : recipe.id === selectedRecipeId}">
       <div class="recipes_list-item-desc">
         <span class="recipes_list-item-desc-title">{{recipe.title}}</span>
-        <span class="recipes_list-item-desc-date">{{recipe.date | date: 'dd.MM.yy'}}</span>
       </div>
       <div class="recipes_list-item-duration">
-        <span>{{recipe.duration}}</span>
+        <span>{{recipe.date | date: 'dd.MM.yy'}}</span>
+        <span>{{recipe.duration | hoursTime}}</span>
       </div>
     </div>
   </div>

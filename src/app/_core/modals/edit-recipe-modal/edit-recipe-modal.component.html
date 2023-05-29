@@ -1,13 +1,21 @@
 <div class="screen" *ngIf="modalState.active">
-  <div class="modal" [@enterContainerFromBottom]>
+  <form class="modal" 
+    [formGroup]="recipeForm" 
+    (ngSubmit)="saveRecipe()" 
+    [@enterContainerFromBottom]>
     <div class="modal-header">
       <span class="type">{{recipeId ? 'Изменение' : 'Добавление'}}</span>
-      <div class="modal-close-btn" (click)="closeSelf()">
-        <span>X</span>
+      <div class="modal-buttons">
+        <button class="modal-close-btn-save" type="submit">
+          <span>Сохранить</span>
+        </button>
+        <div class="modal-close-btn" (click)="closeSelf()">
+          <span>X</span>
+        </div>
       </div>
     </div>
     <div class="modal-body scrollbar">
-      <div class="fields" [formGroup]="recipeForm">
+      <div class="fields">
         <div class="column">
           <div class="row">
             <input class="field w-75" placeholder="Название" type="text" formControlName="title"
@@ -45,6 +53,6 @@
     <!-- <div class="modal-footer">
 
     </div> -->
-  </div>
+  </form>
   <div class="modal-backdrop" (click)="closeSelf()"></div>
 </div>

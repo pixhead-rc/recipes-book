@@ -47,12 +47,40 @@
     line-height: 3rem;
 }
 
+.modal-buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+.modal-close-btn-save {
+    display: flex;
+    cursor: pointer;
+    margin-right: 1rem;
+    padding: 0 0.5rem 0 0.5rem;
+    height: 2rem;
+    border-radius: 0.25rem;
+    background-color: #0183c0;
+    justify-content: center;
+    align-items: center;
+    border: none;
+}
+
+.modal-close-btn-save:hover {
+    background-color: #00aeff;
+}
+
+.modal-close-btn-save span {
+    font-size: 1rem;
+    font-weight: 500;
+    color: white;
+}
+
 .modal-close-btn {
     display: flex;
     cursor: pointer;
     margin-right: 1rem;
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 2rem;
+    height: 2rem;
     border-radius: 0.25rem;
     background-color: #da0000;
     justify-content: center;

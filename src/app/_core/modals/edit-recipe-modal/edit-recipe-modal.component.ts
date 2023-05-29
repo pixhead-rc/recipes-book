@@ -66,6 +66,15 @@ export class EditRecipeModalComponent implements OnInit {
     this.modalStateSub$?.unsubscribe();
   }
 
+  saveRecipe() {
+    if (this.recipeForm.valid) {
+      this.recipesService.saveRecipe(this.recipeForm.value).subscribe();
+      this.closeSelf();
+    } else {
+      console.log('ahahahah');
+    }
+  }
+
   closeSelf() {
     this.recipeId = null;
     this.modalService.closeModal(Modals.EditRecipeModal);
@@ -90,6 +99,8 @@ export class EditRecipeModalComponent implements OnInit {
 
   recipeFormRefresh() {
     this.recipeForm = this.formBuilder.group({
+      id: [this.currentRecipe.id],
+      date: [this.currentRecipe.date],
       title: [this.currentRecipe.title, [Validators.required, Validators.minLength(5), Validators.maxLength(35)]],
       duration: [this.currentRecipe.duration, [Validators.required, Validators.pattern(/^\d+$/), Validators.maxLength(3)]],
       description: [this.currentRecipe.description, [Validators.required, Validators.minLength(5)]],

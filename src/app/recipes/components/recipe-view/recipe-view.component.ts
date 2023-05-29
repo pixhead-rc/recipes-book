@@ -10,8 +10,7 @@ import { RecipesService } from 'src/app/_core/services/recipes.service';
   styleUrls: ['./recipe-view.component.scss']
 })
 export class RecipeViewComponent implements OnInit {
-  currentRecipe!: Recipe;
-  jsonrec!: string;
+  currentRecipe!: Recipe | null;
   recipeId!: string | null;
   $recipeIdSubscription!: Subscription;
 
@@ -38,8 +37,7 @@ export class RecipeViewComponent implements OnInit {
   fetchRecipe(id: string) {
     this.recipesService.getRecipe(id).subscribe(
       recipe => {
-        this.currentRecipe = recipe
-        this.jsonrec = JSON.stringify(recipe);
+        this.currentRecipe = recipe;
       }
     );
   }

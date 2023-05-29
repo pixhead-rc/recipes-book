@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, concatMap, find, first, map } from 'rxjs';
 import { RecipesListItem } from '../models/recipesListItem';
 import { Recipe } from '../models/recipe';
+import { Guid } from 'guid-typescript';
+import { MockApiResponse } from '../models/mockBackendResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -61,7 +63,30 @@ export class RecipesService {
     return this.recipesList;
   }
 
+  saveRecipe(recipe: Recipe): Observable<MockApiResponse> {
+    this.putInLocalStorage(recipe);
+    this.refreshMockBackend();
+    return new BehaviorSubject<MockApiResponse>({status: 200, message: 'Success'}).asObservable();
+  }
+
   deleteRecipe(id: string) {
 
+  }
+
+  putInLocalStorage(recipe: Recipe) {
+    let recipes: Recipe[] = this.recipesLS ? JSON.parse(this.recipesLS) as Recipe[] : [];
+    if (recipe.id) {
+      recipes.forEach(
+        (r, index) => {
+          if (r.id === recipe.id) {
+            recipes[index] = recipe;
+          }
+        }
+      );
+    } else {
+      recipe.id = Guid.create().toString();
+      recipes.push(recipe);
+    }
+    localStorage.setItem('recipes', JSON.stringify(recipes));
   }
 }

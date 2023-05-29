@@ -1,0 +1,17 @@
+<div class="toasts">
+  <div class="toast-container">
+    <div class="toast" 
+      *ngFor="let toast of toasts" 
+      (click)="closeToast(toast.id)"
+      [ngClass]="{
+        'success' : toast.type === 0,
+        'info' : toast.type === 1,
+        'warning' : toast.type === 2,
+        'error' : toast.type === 3
+      }">
+      <div class="toast-message">
+        <span class="noselect">{{toast.message}}</span>
+      </div>
+    </div>
+  </div>
+</div>

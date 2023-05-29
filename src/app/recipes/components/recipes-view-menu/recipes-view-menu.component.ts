@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Modals } from 'src/app/_core/models/modals';
 import { ModalService } from 'src/app/_core/services/modal.service';
+import { ToastsService } from 'src/app/_core/services/toasts.service';
 
 @Component({
   selector: 'recipes-view-menu',
@@ -13,7 +14,8 @@ export class RecipesViewMenuComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private toast: ToastsService
   ) { }
 
   ngOnInit() {
@@ -28,6 +30,10 @@ export class RecipesViewMenuComponent implements OnInit {
 
   openDeleteRecipeModal() {
     this.modalService.openModal(Modals.DeleteRecipeModal, { id: this.recipeId });
+  }
+
+  test() {
+    this.toast.success(new Date().toString());
   }
 
 }

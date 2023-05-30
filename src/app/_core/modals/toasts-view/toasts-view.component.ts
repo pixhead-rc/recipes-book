@@ -3,11 +3,15 @@ import { ToastsService } from '../../services/toasts.service';
 import { ToastState } from '../../models/toastState';
 import { Observable, Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { slideInOut } from 'src/app/_helper/animations';
 
 @Component({
   selector: 'toasts-view',
   templateUrl: './toasts-view.component.html',
   styleUrls: ['./toasts-view.component.scss'],
+  animations: [
+    slideInOut
+  ],
   standalone: true,
   imports: [
     CommonModule

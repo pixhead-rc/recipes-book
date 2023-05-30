@@ -1,11 +1,8 @@
 <div class="recipes">
   <div class="toolbox">
     <input class="toolbox_search" type="text" placeholder="поиск..." [(ngModel)]="search">
-    <select class="sort-dropdown">
-      <option>Дата добавления ↓</option>
-      <option>Дата добавления ↑</option>
-      <option>Название ↓</option>
-      <option>Название ↑</option>
+    <select class="sort-dropdown" (change)="sortList()" [(ngModel)]="currentSortingSetting">
+      <option *ngFor="let sort of sortsArray" [value]="sort">{{sort}}</option>
     </select>
   </div>
   <div class="recipes_list scrollbar">

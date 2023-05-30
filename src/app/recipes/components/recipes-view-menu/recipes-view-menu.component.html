@@ -1,9 +1,9 @@
-<div class="menu" *ngIf="recipeId">
+<div class="menu" *ngIf="shown">
   <div class="buttons">
     <div class="btn btn-blue" (click)="openEditRecipeModal()">
       <span>Редактировать</span>
     </div>
-    <div class="btn btn-red" (click)="test()">
+    <div class="btn btn-red" (click)="openDeleteRecipeModal()">
       <span>Удалить</span>
     </div>
   </div>

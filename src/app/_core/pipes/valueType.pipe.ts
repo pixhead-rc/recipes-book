@@ -6,7 +6,10 @@ import { ValueTypes } from '../models/recipe';
 })
 export class ValueTypePipe implements PipeTransform {
 
-  transform(value: string, valueType: number): string {
+  transform(value: string, valueType: ValueTypes): string {
+    if (!value) {
+      return 'по вкусу';
+    }
     const lastChar = value[value.length - 1];
     let isSingles = lastChar == '1';
     let isOverTwo = lastChar == '2' || lastChar == '3' || lastChar == '4';

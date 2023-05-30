@@ -3,6 +3,7 @@ import { ActivatedRoute, Router, RoutesRecognized } from '@angular/router';
 import { BehaviorSubject, Subscription, debounceTime, distinctUntilChanged, filter } from 'rxjs';
 import { Modals } from 'src/app/_core/models/modals';
 import { RecipesListItem } from 'src/app/_core/models/recipesListItem';
+import { Sorts } from 'src/app/_core/models/sortsEnum';
 import { ModalService } from 'src/app/_core/services/modal.service';
 import { RecipesService } from 'src/app/_core/services/recipes.service';
 
@@ -24,13 +25,16 @@ export class RecipesListComponent implements OnInit {
     this._search$.next(this._search);
   }
 
-  currentSortingSetting: string = 'Сначала недорогие';
+  get sortsArray() {
+    return Object.values(Sorts)
+  }
+
+  currentSortingSetting: Sorts = Sorts.DateDesc;
   sortDropdownExpanded: boolean = false;
 
   constructor(
     private recipesService: RecipesService,
     private modalService: ModalService,
-    private activatedRoute: ActivatedRoute,
     private router: Router
   ) { }
 
@@ -39,6 +43,7 @@ export class RecipesListComponent implements OnInit {
       response => {
         this.recipes = response;
         this.filteredRecipes = response;
+        this.sortList();
       }
     );
 
@@ -69,13 +74,21 @@ export class RecipesListComponent implements OnInit {
     );
   }
 
-  toggleSortDropdown() {
-    this.sortDropdownExpanded = !this.sortDropdownExpanded;
-  }
-
-  sortList(sortSetting: string) {
-    this.toggleSortDropdown();
-    this.currentSortingSetting = sortSetting;
+  sortList() {
+    switch (this.currentSortingSetting) {
+      case Sorts.DateAsc:
+        this.filteredRecipes =  this.filteredRecipes.sort((a, b) => a.date.toString().localeCompare(b.date.toString()));
+        break;
+      case Sorts.DateDesc:
+        this.filteredRecipes =  this.filteredRecipes.sort((a, b) => b.date.toString().localeCompare(a.date.toString()));
+        break;
+      case Sorts.NameAsc:
+        this.filteredRecipes =  this.filteredRecipes.sort((a, b) => a.title.localeCompare(b.title));
+        break;
+      case Sorts.NameDesc:
+        this.filteredRecipes =  this.filteredRecipes.sort((a, b) => b.title.localeCompare(a.title));
+        break;
+    }
   }
 
   markSelectedRecipe() {

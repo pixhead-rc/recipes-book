@@ -13,6 +13,12 @@ export class Ingredient {
     name!: string;
     value!: string;
     valueType!: ValueTypes;
+
+    constructor(ingredient: Ingredient) {
+        this.name = ingredient.name;
+        this.value = ingredient.value;
+        this.valueType = ingredient.valueType;
+    }
 }
 
 export class Step {
@@ -20,9 +26,9 @@ export class Step {
 }
 
 export enum ValueTypes {
-    'Count',
-    'Weight',
-    'Volume',
-    'Spoons',
-    'Any'
+    Count = 'шт',
+    Weight = 'гр',
+    Volume = 'мл',
+    Spoons = 'лож',
+    Any = 'по вкусу'
 }

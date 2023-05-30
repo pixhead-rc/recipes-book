@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Modals } from 'src/app/_core/models/modals';
 import { ModalService } from 'src/app/_core/services/modal.service';
@@ -10,6 +10,7 @@ import { ToastsService } from 'src/app/_core/services/toasts.service';
   styleUrls: ['./recipes-view-menu.component.scss']
 })
 export class RecipesViewMenuComponent implements OnInit {
+  @Input() shown: boolean = false;
   recipeId!: string | null;
 
   constructor(
@@ -30,10 +31,6 @@ export class RecipesViewMenuComponent implements OnInit {
 
   openDeleteRecipeModal() {
     this.modalService.openModal(Modals.DeleteRecipeModal, { id: this.recipeId });
-  }
-
-  test() {
-    this.toast.success(new Date().toString());
   }
 
 }

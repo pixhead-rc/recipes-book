@@ -1,6 +1,7 @@
 <div class="toasts">
   <div class="toast-container">
-    <div class="toast" 
+    <div class="toast"
+      [@slideInOut]
       *ngFor="let toast of toasts" 
       (click)="closeToast(toast.id)"
       [ngClass]="{

@@ -7,6 +7,8 @@ import { PipesModule } from '../../pipes/pipes.module';
 import { ModalService } from '../../services/modal.service';
 import { enterContainerFromBottom } from 'src/app/_helper/animations';
 import { RecipesService } from '../../services/recipes.service';
+import { ToastsService } from '../../services/toasts.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'delete-recipe-modal',
@@ -31,7 +33,8 @@ export class DeleteRecipeModalComponent implements OnInit {
   
   constructor(
     private modalService: ModalService,
-    private recipesService: RecipesService
+    private recipesService: RecipesService,
+    private toast: ToastsService
   ) { }
 
   ngOnInit() {
@@ -48,7 +51,16 @@ export class DeleteRecipeModalComponent implements OnInit {
   }
 
   deleteRecipe() {
-    this.recipesService.deleteRecipe(this.recipeId);
+    this.recipesService.deleteRecipe(this.recipeId).subscribe(
+      respose => {
+        if (respose.status === 200) {
+          this.toast.success(respose.message);
+        }
+        else {
+          this.toast.error(respose.message);
+        }
+      }
+    );
     this.closeSelf();
   }
 

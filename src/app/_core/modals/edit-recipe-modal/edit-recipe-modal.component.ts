@@ -4,10 +4,12 @@ import { ModalService } from '../../services/modal.service';
 import { ModalState, Modals } from '../../models/modals';
 import { Subscription, distinctUntilChanged } from 'rxjs';
 import { enterContainerFromBottom } from 'src/app/_helper/animations';
-import { Ingredient, Recipe, Step } from '../../models/recipe';
-import { FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Ingredient, Recipe, Step, ValueTypes } from '../../models/recipe';
+import { AbstractControl, Form, FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PipesModule } from '../../pipes/pipes.module';
 import { RecipesService } from '../../services/recipes.service';
+import { ToastsService } from '../../services/toasts.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'edit-recipe-modal',
@@ -33,10 +35,16 @@ export class EditRecipeModalComponent implements OnInit {
 
   recipeId!: string | null;
 
+  get typesArray() {
+    return Object.values(ValueTypes);
+  }
+
   constructor(
     private modalService: ModalService,
     private formBuilder: FormBuilder,
-    private recipesService: RecipesService
+    private recipesService: RecipesService,
+    private toast: ToastsService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -68,10 +76,16 @@ export class EditRecipeModalComponent implements OnInit {
 
   saveRecipe() {
     if (this.recipeForm.valid) {
-      this.recipesService.saveRecipe(this.recipeForm.value).subscribe();
+      this.recipesService.saveRecipe(this.recipeForm.value).subscribe(
+        response => {
+          if (response.status === 200) {
+            this.toast.success('Сохранено!');
+          }
+        }
+      );
       this.closeSelf();
     } else {
-      console.log('ahahahah');
+      this.toast.error('Заполните все обязательные поля!');
     }
   }
 
@@ -82,9 +96,7 @@ export class EditRecipeModalComponent implements OnInit {
 
   emptyRecipeInit() {
     this.currentRecipe = new Recipe();
-    this.currentRecipe.ingredients.push(new Ingredient());
-    this.currentRecipe.ingredients.push(new Ingredient());
-    this.currentRecipe.steps.push(new Step());
+    this.currentRecipe.ingredients.push(new Ingredient({ name: '', value: '', valueType: ValueTypes.Any}));
     this.currentRecipe.steps.push(new Step());
   }
 
@@ -93,14 +105,14 @@ export class EditRecipeModalComponent implements OnInit {
       (recipe) => {
         this.currentRecipe = recipe;
       },
-      (error) => console.log(error)
+      error => console.log(error)
     );
   }
 
   recipeFormRefresh() {
     this.recipeForm = this.formBuilder.group({
       id: [this.currentRecipe.id],
-      date: [this.currentRecipe.date],
+      date: [this.currentRecipe.date || new Date(Date.now())],
       title: [this.currentRecipe.title, [Validators.required, Validators.minLength(5), Validators.maxLength(35)]],
       duration: [this.currentRecipe.duration, [Validators.required, Validators.pattern(/^\d+$/), Validators.maxLength(3)]],
       description: [this.currentRecipe.description, [Validators.required, Validators.minLength(5)]],
@@ -113,7 +125,8 @@ export class EditRecipeModalComponent implements OnInit {
         (this.recipeForm.controls['ingredients'] as FormArray).push(
           this.formBuilder.group({
             name: [ingr.name, [Validators.required, Validators.minLength(2), Validators.maxLength(30)]],
-            value: [ingr.value, [Validators.required, Validators.pattern(/^\d+$/)]]
+            value: [ingr.value, ingr.valueType !== ValueTypes.Any ? [Validators.required, Validators.pattern(/^\d+$/)] : [Validators.pattern(/^\d+$/)]],
+            valueType: [ingr.valueType, [Validators.required]]
           })
         );
       }
@@ -128,6 +141,43 @@ export class EditRecipeModalComponent implements OnInit {
         );
       }
     );
+  }
+
+  addInredient() {
+    (this.recipeForm.controls['ingredients'] as FormArray).push(
+      this.formBuilder.group({
+        name: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(30)]],
+        value: [null, [Validators.pattern(/^\d+$/)]],
+        valueType: [ValueTypes.Any, [Validators.required]]
+      })
+    );
+  }
+
+  deleteIngredient(index: number) {
+    (this.recipeForm.controls['ingredients'] as FormArray).removeAt(index);
+  }
+
+  addStep() {
+    (this.recipeForm.controls['steps'] as FormArray).push(
+      this.formBuilder.group({
+        value: [null, [Validators.required, Validators.minLength(2)]]
+      })
+    );
+  }
+
+  deleteStep(index: number) {
+    (this.recipeForm.controls['steps'] as FormArray).removeAt(index);
+  }
+
+  updateIngredientValueValidator(index: number) {
+    let control = ((this.recipeForm.controls['ingredients'] as FormArray).at(index) as FormGroup);
+    if (control.controls['valueType'].value === ValueTypes.Any) {
+      control.controls['value'].removeValidators(Validators.required);
+      control.controls['value'].updateValueAndValidity();
+    } else {
+      control.controls['value'].setValidators([Validators.required, Validators.pattern(/^\d+$/)]);
+      control.controls['value'].updateValueAndValidity();
+    }
   }
 
   adjustTextAreas() {

@@ -69,8 +69,19 @@ export class RecipesService {
     return new BehaviorSubject<MockApiResponse>({status: 200, message: 'Success'}).asObservable();
   }
 
-  deleteRecipe(id: string) {
+  deleteRecipe(id: string): Observable<MockApiResponse>{
+    let recipes: Recipe[] = this.recipesLS ? JSON.parse(this.recipesLS) as Recipe[] : [];
+    let filteredRecipes = recipes.filter(
+      recipe => recipe.id !== id
+    );
 
+    if (recipes.length !== filteredRecipes.length) {
+      localStorage.setItem('recipes', JSON.stringify(filteredRecipes));
+      this.refreshMockBackend();
+      return new BehaviorSubject<MockApiResponse>({status: 200, message: 'Recipe deleted'}).asObservable();
+    } else {
+      return new BehaviorSubject<MockApiResponse>({status: 400, message: 'No recipe found'}).asObservable();
+    }
   }
 
   putInLocalStorage(recipe: Recipe) {

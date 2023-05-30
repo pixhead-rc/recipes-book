@@ -40,7 +40,7 @@
                 <select class="field value-types-select" formControlName="valueType" (change)="updateIngredientValueValidator(i)">
                   <option *ngFor="let type of typesArray" [value]="type">{{type}}</option>
                 </select>
-                <div class="btn-delete-row" (click)="deleteIngredient(i)">
+                <div class="btn-delete-row" *ngIf="i > 0" (click)="deleteIngredient(i)">
                   <span>-</span>
                 </div>
               </div>
@@ -59,7 +59,7 @@
               <div class="row" *ngFor="let ingr of (recipeForm.controls['steps'] | asFormArray).controls; index as i" [formGroupName]="i">
                 <textarea class="field area w-100" placeholder="Описание" type="text" formControlName="value"
                   [ngClass]="{'invalid' : ingr.get('value')?.errors && ingr.get('value')?.touched}"></textarea>
-                <div class="btn-delete-row" (click)="deleteStep(i)">
+                <div class="btn-delete-row" *ngIf="i > 0" (click)="deleteStep(i)">
                   <span>-</span>
                 </div>
               </div>

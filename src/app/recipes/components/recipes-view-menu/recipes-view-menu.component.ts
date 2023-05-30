@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Modals } from 'src/app/_core/models/modals';
 import { ModalService } from 'src/app/_core/services/modal.service';
+import { RecipesService } from 'src/app/_core/services/recipes.service';
 import { ToastsService } from 'src/app/_core/services/toasts.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class RecipesViewMenuComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private modalService: ModalService,
-    private toast: ToastsService
+    private recipeSerive: RecipesService
   ) { }
 
   ngOnInit() {
@@ -31,6 +32,10 @@ export class RecipesViewMenuComponent implements OnInit {
 
   openDeleteRecipeModal() {
     this.modalService.openModal(Modals.DeleteRecipeModal, { id: this.recipeId });
+  }
+
+  dropLocalStorage() {
+    this.recipeSerive.dropLocalStorage();
   }
 
 }

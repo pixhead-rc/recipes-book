@@ -1,9 +1,8 @@
 .menu {
     position: absolute;
-    width: 16rem;
     height: 2rem;
     top: 0;
-    left: calc(75% - 8rem);
+    left: calc(60% - 8rem);
 }
 
 .buttons {
@@ -12,7 +11,6 @@
     justify-content: center;
     align-items: flex-start;
     gap: 1rem;
-    width: 100%;
     height: 100%;
 }
 

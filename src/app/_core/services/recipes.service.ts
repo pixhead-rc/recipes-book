@@ -27,7 +27,7 @@ export class RecipesService {
   //  recipesSubj$.asObs() и recipesListSubj$.asObs() как фейковые роуты на фетч данных
   //
   //
-  
+
   refreshMockBackend() {
     this.recipesLS = localStorage.getItem('recipes');
     let recipes: Recipe[] = this.recipesLS ? JSON.parse(this.recipesLS) as Recipe[] : [];
@@ -106,5 +106,9 @@ export class RecipesService {
       recipes.push(recipe);
     }
     localStorage.setItem('recipes', JSON.stringify(recipes));
+  }
+
+  dropLocalStorage() {
+    localStorage.removeItem('recipes');
   }
 }

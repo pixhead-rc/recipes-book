@@ -14,6 +14,11 @@ const routes: Routes = [
       }
     ]
   },
+  {
+    path: "**",
+    redirectTo: "/recipes/recipe/",
+    pathMatch: "full",
+  },
 ];
 
 @NgModule({

@@ -26,6 +26,13 @@
     align-items: center;
 }
 
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .message {
     padding: 1rem;
     background-color: #00aeff;

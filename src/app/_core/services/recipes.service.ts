@@ -21,6 +21,13 @@ export class RecipesService {
     this.refreshMockBackend();
   }
 
+  //
+  //
+  //  localstorage выступает как фейковая база
+  //  recipesSubj$.asObs() и recipesListSubj$.asObs() как фейковые роуты на фетч данных
+  //
+  //
+  
   refreshMockBackend() {
     this.recipesLS = localStorage.getItem('recipes');
     let recipes: Recipe[] = this.recipesLS ? JSON.parse(this.recipesLS) as Recipe[] : [];
